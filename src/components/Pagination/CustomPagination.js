@@ -1,19 +1,31 @@
 import React from "react";
 import Pagination from "@mui/material/Pagination";
-import { createTheme } from "@mui/material/styles";
-import { ThemeProvider } from "@mui/material/styles";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 const darkTheme = createTheme({
   palette: {
-    type: "dark",
+    mode: "dark",
+    primary: {
+      main: "#fff", 
+    },
+  },
+  components: {
+    MuiPaginationItem: {
+      styleOverrides: {
+        root: {
+          color: "#fff", 
+        },
+      },
+    },
   },
 });
 
 function CustomPagination({ setPage, numofPages = 10 }) {
   function handleChange(page) {
     setPage(page);
-    window.scroll(0, 0)
+    window.scroll(0, 0);
   }
+
   return (
     <div
       style={{
@@ -28,6 +40,11 @@ function CustomPagination({ setPage, numofPages = 10 }) {
           color="primary"
           count={numofPages}
           onChange={(e) => handleChange(e.target.textContent)}
+          sx={{
+            "& .MuiPaginationItem-root": {
+              color: "#fff", 
+            },
+          }}
         />
       </ThemeProvider>
     </div>
